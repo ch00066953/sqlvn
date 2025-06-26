@@ -1,0 +1,48 @@
+# 数据源配置
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@10.81.71.11:1521/oracle
+    username: dev
+    password: dev
+    driverClassName: oracle.jdbc.OracleDriver
+    type: com.alibaba.druid.pool.DruidDataSource
+    validationQuery: SELECT 1 FROM DUAL
+    testOnBorrow: true
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    maxLifetime: 1800000
+    maxActive: 10
+    maxWait: 10000
+    initialSize: 5
+    removeAbandoned: true
+    removeAbandonedTimeout: 60
+
+  flyway:
+    # 是否在执行迁移时自动调用验证。
+    validate-on-migrate: false
+    # 基线
+    baseline-on-migrate: true
+    #控制迁移脚本的执行顺序 outOfOrder: false严格按照迁移脚本的版本号顺序,outOfOrder: true允许 Flyway 跳过缺失的版本
+    outOfOrder: true
+    locations: filesystem:src/main/resources/sqlvn/migration
+
+      
+      
+  sqlvn:
+    # sqlvn的版本号，只执行sqlvn.sql-query-locations下对应版本的脚本。与flyway不同，flyway会执行flyway.locations下所有文件
+    version: "2025.01"
+    # sqlvn的dql目录，对应生成dml到sql-bak-locations,sql-migration-locations
+    sql-query-locations: file:src/main/resources/sqlvn/query
+    sql-bak-locations: file:src/main/resources/sqlvn/bak
+    sql-migration-locations: file:src/main/resources/sqlvn/migration
+    # SQL 备份的文件名前缀。
+    sql-query-prefix: dql
+    # SQL 备份的文件名后缀。
+    sql-query-suffixes: .sql
+    #  SQL备份文件
+    backup:
+      enabled: true
+    #  SQL生成迁移文件，建议在开发环境使用自动生成迁移sql并执行验证
+    genmigsql:
+      enabled: true
