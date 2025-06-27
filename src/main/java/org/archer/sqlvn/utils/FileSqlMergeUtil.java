@@ -143,7 +143,7 @@ public class FileSqlMergeUtil {
             List<File> fileList = new ArrayList<>();
             return recursion(dirPath, fileList,false);
         } else {
-            throw new Exception("请输入正确的文件夹路径");
+            throw new Exception("请输入正确的文件夹路径,当前路径为："+dirPath.toString());
         }
     }
 

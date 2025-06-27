@@ -212,8 +212,9 @@ public class DQLtoDMLConverterWithComments {
   private String generateDeleteStatement(String tableName, String whereClause) {
       StringBuilder sb = new StringBuilder("DELETE FROM ").append(tableName);
       if (whereClause != null && !whereClause.trim().isEmpty()) {
-          sb.append(" WHERE ").append(whereClause.trim()).append(";");
+          sb.append(" WHERE ").append(whereClause.trim());
       }
+	  sb.append(";");
       return sb.toString();
   }
 

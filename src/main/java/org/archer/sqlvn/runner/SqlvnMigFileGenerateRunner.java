@@ -1,5 +1,6 @@
 package org.archer.sqlvn.runner;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -55,7 +56,9 @@ public class SqlvnMigFileGenerateRunner implements ApplicationRunner {
         log.info("Found " + dqlFiles.size() + " DQL files to GenMigSQL");
         
         FileSqlvnRenameUtil.sBaseVersionNo = FileSqlvnRenameUtil.VERSION_V + sqlPathGenerator.getVersion();
-        FileSqlvnRenameUtil.revertAllFileByPath(sqlPathGenerator.generateMigrationVersionPath().toString());
+        
+        if (Files.exists(sqlPathGenerator.generateMigrationVersionPath())) 
+        	FileSqlvnRenameUtil.revertAllFileByPath(sqlPathGenerator.generateMigrationVersionPath().toString());
         
         for (Path dqlFile : dqlFiles) {
             try {

@@ -40,9 +40,9 @@ spring:
     sql-query-prefix: dql
     # SQL 备份的文件名后缀。
     sql-query-suffixes: .sql
-    #  SQL备份文件
-    backup:
-      enabled: true
+    #  SQL备份文件,建议启用
+    backup-enabled: true
     #  SQL生成迁移文件，建议在开发环境使用自动生成迁移sql并执行验证
-    genmigsql:
-      enabled: true
+    genmigsql-enabled: true
+    #  执行迁移,需要迁移的时候开启
+    migration-enabled: true
